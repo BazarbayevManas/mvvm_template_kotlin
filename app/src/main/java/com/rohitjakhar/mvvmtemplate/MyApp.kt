@@ -1,21 +1,21 @@
 package com.rohitjakhar.mvvmtemplate
 
 import android.app.Application
-import com.google.android.gms.ads.MobileAds
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.initialize
-import dagger.hilt.android.HiltAndroidApp
+import com.rohitjakhar.mvvmtemplate.di.mainModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
-@HiltAndroidApp
 class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
-
-        Firebase.initialize(this)
-        MobileAds.initialize(this)
-        FirebaseAnalytics.getInstance(this)
-            .setAnalyticsCollectionEnabled(!BuildConfig.DEBUG)
+        startKoin {
+            // Log Koin into Android logger
+            androidLogger()
+            // Reference Android context
+            androidContext(this@MyApp)
+            // Load modules
+            modules(mainModule)
+        }
     }
 }

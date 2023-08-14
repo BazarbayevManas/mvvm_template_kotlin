@@ -1,31 +1,17 @@
 package com.rohitjakhar.mvvmtemplate.presentation.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.rohitjakhar.mvvmtemplate.R
 import com.rohitjakhar.mvvmtemplate.databinding.FragmentHomeBinding
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel by viewModels<HomeViewModel>()
+class HomeFragment : Fragment(R.layout.fragment_home) {
+    private val binding: FragmentHomeBinding by viewBinding()
+    private val viewModel by viewModel<HomeViewModel>() // HomeViewModel needs to be declared in di/AppModule.kt
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 }

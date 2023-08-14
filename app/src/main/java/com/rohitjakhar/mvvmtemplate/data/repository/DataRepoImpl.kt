@@ -7,9 +7,8 @@ import com.rohitjakhar.mvvmtemplate.domain.repository.DataRepo
 import com.rohitjakhar.mvvmtemplate.util.ErrorType
 import com.rohitjakhar.mvvmtemplate.util.Resource
 import java.net.SocketTimeoutException
-import javax.inject.Inject
 
-class DataRepoImpl @Inject constructor(
+class DataRepoImpl constructor(
     private val webService: WebService
 ) : DataRepo {
     override suspend fun getData(): Resource<DataModel> {
